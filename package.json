@@ -1,4 +1,6 @@
-name": "Advanced Arabic Chat Application Interface",
+
+  {
+      "name": "Advanced Arabic Chat Application Interface",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
