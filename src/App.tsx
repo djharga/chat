@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { MobileLayout } from './components/MobileLayout';
-import { DesktopLayout } from './components/DesktopLayout';
-import { UserProfile } from './components/UserProfile';
-import { GlobalSearch } from './components/GlobalSearch';
-import { ContactsManager } from './components/ContactsManager';
-import { AdvancedSettings } from './components/AdvancedSettings';
-import { NotificationCenter } from './components/NotificationCenter';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
+
+// Lazy-loaded components for code-splitting
+const MobileLayout = lazy(() => import('./components/MobileLayout').then(m => ({ default: m.MobileLayout })));
+const DesktopLayout = lazy(() => import('./components/DesktopLayout').then(m => ({ default: m.DesktopLayout })));
+const UserProfile = lazy(() => import('./components/UserProfile').then(m => ({ default: m.UserProfile })));
+const GlobalSearch = lazy(() => import('./components/GlobalSearch').then(m => ({ default: m.GlobalSearch })));
+const ContactsManager = lazy(() => import('./components/ContactsManager').then(m => ({ default: m.ContactsManager })));
+const AdvancedSettings = lazy(() => import('./components/AdvancedSettings').then(m => ({ default: m.AdvancedSettings })));
+const NotificationCenter = lazy(() => import('./components/NotificationCenter').then(m => ({ default: m.NotificationCenter })));
 import { Toaster } from './components/ui/sonner';
 import { toast } from 'sonner';
 
@@ -185,7 +187,8 @@ export default function App() {
   };
 
   return (
-    <>
+    <Suspense fallback={<div className="p-4 text-center">جارٍ التحميل...</div>}>
+      <>
       {isMobile ? (
         <MobileLayout
           {...sharedProps}
@@ -256,6 +259,7 @@ export default function App() {
           }
         }}
       />
-    </>
+      </>
+    </Suspense>
   );
 }
