@@ -5791,3 +5791,8 @@ html {
     opacity: 0;
   }
 }
+
+/* RTL icon mirroring */
+[dir="rtl"] svg[data-icon-direction="ltr"] {
+  transform: scaleX(-1);
+}

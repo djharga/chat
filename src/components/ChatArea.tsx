@@ -288,7 +288,7 @@ export function ChatArea({ conversationId, onBack, isMobile }: ChatAreaProps) {
   }, {} as Record<string, Message[]>);
 
   return (
-    <div className="flex-1 flex flex-col bg-background relative">
+    <div role="main" aria-label="منطقة الدردشة" className="flex-1 flex flex-col bg-background relative">
       {/* Chat Header */}
       <motion.div 
         initial={{ opacity: 0, y: -10 }}
@@ -298,7 +298,7 @@ export function ChatArea({ conversationId, onBack, isMobile }: ChatAreaProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {isMobile && (
-              <Button variant="ghost" size="sm" onClick={onBack}>
+              <Button variant="ghost" size="sm" onClick={onBack} aria-label="العودة إلى قائمة المحادثات">
                 <ArrowLeft className="h-4 w-4" />
               </Button>
             )}
@@ -333,24 +333,24 @@ export function ChatArea({ conversationId, onBack, isMobile }: ChatAreaProps) {
             {!conversation.isGroup && (
               <>
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <Button variant="ghost" size="sm" className="text-green-600 hover:text-green-700 hover:bg-green-50">
+                  <Button variant="ghost" size="sm" className="text-green-600 hover:text-green-700 hover:bg-green-50" aria-label="مكالمة صوتية">
                     <Phone className="h-4 w-4" />
                   </Button>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50">
+                  <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700 hover:bg-blue-50" aria-label="مكالمة فيديو">
                     <Video className="h-4 w-4" />
                   </Button>
                 </motion.div>
               </>
             )}
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" aria-label="بحث في المحادثة">
               <Search className="h-4 w-4" />
             </Button>
             
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" aria-label="خيارات إضافية">
                   <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -378,6 +378,9 @@ export function ChatArea({ conversationId, onBack, isMobile }: ChatAreaProps) {
       {/* Messages Area */}
       <div 
         ref={messagesContainerRef}
+        role="log"
+        aria-live="polite"
+        aria-atomic="false"
         className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-background to-muted/10"
       >
         <AnimatePresence>
